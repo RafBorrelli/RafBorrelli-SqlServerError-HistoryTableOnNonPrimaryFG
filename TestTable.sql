@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[TestTable]
+(
+    [TestID]    INT NOT NULL IDENTITY,
+    [StartDate] DATETIME2 GENERATED ALWAYS AS ROW START NOT NULL,  
+    [EndDate]   DATETIME2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL, 
+    PERIOD FOR SYSTEM_TIME (StartDate, EndDate),  
+    CONSTRAINT [PK_TestTable] PRIMARY KEY CLUSTERED ([TestID]) ON [TestFilegroup], 
+) ON [TestFilegroup]
+WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.TestTable_History));
